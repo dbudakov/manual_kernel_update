@@ -22,7 +22,9 @@ sudo su -
 yum install wget -y
 ```
 Создаем и переходим в каталог для сборки.  
-``` mkdir /opt/src/kernel && cd /opt/src/kernel```  
+``` 
+mkdir /opt/src/kernel && cd /opt/src/kernel
+```  
 Далее качиваем rpm пакет с наличием исходного кода ядра с одного из указанных ресурсов, и достаем исходники   
 ```
 wget http://vault.centos.org/7.0.1406/updates/Source/SPackages/kernel-3.10.0-123.1.2.el7.src.rpm  
