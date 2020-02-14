@@ -9,7 +9,7 @@
 ** : В вашем образе нормально работают VirtualBox Shared Folders  
 
 # Решение  
-в решении описанa непосредственно сборка ядра на /manual/Vagrantfile для описания установки VirtualBox, Vagrant, Packer, и настройки Git, смотрите файлы с соответствующими именами разделе /support.   
+В решении описанa непосредственно сборка ядра на /manual/Vagrantfile для описания установки VirtualBox, Vagrant, Packer, и настройки Git, смотрите файлы с соответствующими именами разделе /support.   
   
 Поднимаем ВМ, выполняя указанную команду из тестовой директории с Vagrantfile файлом  
 ```
@@ -43,7 +43,10 @@ cp /boot/config"uname -r" ./.config
 Для запуска make oldconfig потебуется gcc, первая команда проверит возможна ли сборка, появиться настройка новых опций, можно передать параметр для ответа за паросы  
 ```
 yum install gcc -y
-make oldconfig .config` or `yes "" | make oldconfig
+make oldconfig .config 
+or
+make olddefconfig
+yes "" | make oldconfig
 ```
 Далее запуск make, в несколько потоков  
 `make -j[N]`  
