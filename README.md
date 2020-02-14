@@ -26,7 +26,7 @@ yum install wget -y
 mkdir /opt/src/kernel && cd /opt/src/kernel
 ```  
 Далее качиваем rpm пакет с наличием исходного кода ядра с одного из указанных ресурсов, и достаем исходники   
-```pyton
+```sh
 wget http://vault.centos.org/7.0.1406/updates/Source/SPackages/kernel-3.10.0-123.1.2.el7.src.rpm
 rpm2cpio kernel-3.10.0-123.1.2.el7.src.rpm | cpio -t | grep tar
 rpm2cpio kernel-3.10.0-123.1.2.el7.src.rpm | cpio -iv linux-3.10.0-123.1.2.el7.tar.xz  
