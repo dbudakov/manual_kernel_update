@@ -9,7 +9,7 @@
 ** : В вашем образе нормально работают VirtualBox Shared Folders  
 
 # Решение  
-В решении описанa непосредственно сборка ядра на /manual/Vagrantfile для описания установки VirtualBox, Vagrant, Packer, и настройки Git, смотрите файлы с соответствующими именами разделе /support.   
+В решении описанa непосредственно сборка ядра на стенде [/1.kernel_update/manual/Vagrantfile](https://github.com/dbudakov/1.kernel_update/manual.git) для описания установки VirtualBox, Vagrant, Packer, и настройки Git, смотрите файлы с соответствующими именами разделе [/support](https://github.com/dbudakov/support.git).   
   
 Поднимаем ВМ, выполняя указанную команду из тестовой директории с Vagrantfile файлом  
 ```
