@@ -25,6 +25,9 @@ yum install wget -y
 ``` 
 mkdir /opt/src/kernel && cd /opt/src/kernel
 ```  
+
+
+
 Далее качиваем rpm пакет с наличием **__исходного кода ядра__** с одного из указанных ресурсов, и достаем исходники   
 ```
 wget http://vault.centos.org/7.0.1406/updates/Source/SPackages/kernel-3.10.0-123.1.2.el7.src.rpm
@@ -55,7 +58,16 @@ _Возможно возникнут ошибки при кофигурации,
 yum install flex bison -y  
 make olddefconfig .config
 ```
-Далее запуск **__make__** , в несколько потоков  
+Далее запуск **__make__** , в несколько потоков,предварительно требуется запустить `make -j[N] modules_install
+` _могут потребоваться следующие пакеты:_  
 ```  
+yum install elfutils-libelf-devel  
+yum install openssl-devel  
+yum install bc  
+yum install perl  
+
+make -j[N] modules_install  
+
 make -j[N]  
 ```
+
