@@ -51,4 +51,6 @@ make olddefconfig
 yes "" | make oldconfig
 ```
 Далее запуск make, в несколько потоков  
-`make -j[N]`  
+```  
+make -j[N]  
+```
