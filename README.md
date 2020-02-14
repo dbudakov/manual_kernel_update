@@ -74,13 +74,13 @@ make -j[N]
 make -j[N] modules_install  
 make -j[N] install  
 ```
-ядро устанавливается сразу в каталог _`/boot`_ после установки остаеся обновить настройки _`grub2`_ и установить ядро по умолчанию
+ядро устанавливается сразу в каталог _`/boot`_ после установки остаеся обновить настройки _`grub2`_ и установить ядро по умолчанию  
 ```
-sudo grub2-mkconfig -o /boot/grub2/grub.cfg
-sudo grub2-set-default 0
-sudo reboot
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg  
+sudo grub2-set-default 0  
+sudo reboot  
 ```
-проверить ядро можно командой `uname -r`
+проверить ядро можно командой `uname -r`  
 ```
-uname -r
+uname -r  
 ```
