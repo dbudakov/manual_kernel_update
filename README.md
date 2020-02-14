@@ -58,8 +58,7 @@ _Возможно возникнут ошибки при кофигурации,
 yum install flex bison -y  
 make olddefconfig .config
 ```
-Далее запуск **__make__** , в несколько потоков,предварительно требуется запустить `make -j[N] modules_install
-` _могут потребоваться следующие пакеты:_  
+Далее запуск **__make__** , в несколько потоков, _могут потребоваться следующие пакеты:_  
 ```  
 yum install elfutils-libelf-devel  
 yum install openssl-devel  
@@ -70,4 +69,8 @@ make -j[N] modules_install
 
 make -j[N]  
 ```
-
+После успешной сборки запускаем `make -j[N] install`  , предварительно запустив `make -j[N] modules_install`
+```
+make -j[N] modules_install  
+make -j[N] install  
+```
