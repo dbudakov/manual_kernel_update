@@ -25,14 +25,14 @@ yum install wget -y
 ``` 
 mkdir /opt/src/kernel && cd /opt/src/kernel
 ```  
-Далее качиваем rpm пакет с наличием исходного кода ядра с одного из указанных ресурсов, и достаем исходники   
+Далее качиваем rpm пакет с наличием **__исходного кода ядра__** с одного из указанных ресурсов, и достаем исходники   
 ```
 wget http://vault.centos.org/7.0.1406/updates/Source/SPackages/kernel-3.10.0-123.1.2.el7.src.rpm
 rpm2cpio kernel-3.10.0-123.1.2.el7.src.rpm | cpio -t | grep tar
 rpm2cpio kernel-3.10.0-123.1.2.el7.src.rpm | cpio -iv linux-3.10.0-123.1.2.el7.tar.xz  
 tar -xvf linux-3.10.0-123.1.2.el7.tar.xz  
 ```
-или другой ресурс, но в решении используестся `vault.centos.org`  
+или другой ресурс, но в решении используестся _vault.centos.org_
 ```
 wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.213.tar.xz
 tar -xvf linux-4.4.213.tar.xz
@@ -42,7 +42,7 @@ tar -xvf linux-4.4.213.tar.xz
 cd linux-3.10.0-123.1.2.el7
 cp /boot/config"uname -r" ./.config
 ```
-Для запуска make oldconfig потебуется gcc, первая команда проверит возможна ли сборка, появиться настройка новых опций, можно передать параметр для ответа за паросы  
+Для запуска make oldconfig потебуется _gcc_ , первая команда проверит возможна ли сборка, появиться настройка новых опций, можно передать параметр для ответа за паросы  
 ```
 yum install gcc -y
 make oldconfig .config 
@@ -50,7 +50,7 @@ or
 make olddefconfig
 yes "" | make oldconfig
 ```
-Далее запуск make, в несколько потоков  
+Далее запуск **__make__** , в несколько потоков  
 ```  
 make -j[N]  
 ```
