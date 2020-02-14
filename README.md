@@ -16,10 +16,12 @@
 Понадобиться утилита wget (или её альтернатива сurl)  
 `yum install wget -y`  
 Далее качиваем rpm пакет с наличием исходного кода ядра с одного из указанных ресурсов, и достаем исходники   
-`wget http://vault.centos.org/7.0.1406/updates/Source/SPackages/kernel-3.10.0-123.1.2.el7.src.rpm`  
-`rpm2cpio kernel-3.10.0-123.1.2.el7.src.rpm | cpio -t | grep tar`  
-`rpm2cpio kernel-3.10.0-123.1.2.el7.src.rpm | cpio -iv linux-3.10.0-123.1.2.el7.tar.xz`  
-`tar -xvf linux-3.10.0-123.1.2.el7.tar.xz`  
+```
+wget http://vault.centos.org/7.0.1406/updates/Source/SPackages/kernel-3.10.0-123.1.2.el7.src.rpm  
+rpm2cpio kernel-3.10.0-123.1.2.el7.src.rpm | cpio -t | grep tar
+rpm2cpio kernel-3.10.0-123.1.2.el7.src.rpm | cpio -iv linux-3.10.0-123.1.2.el7.tar.xz  
+tar -xvf linux-3.10.0-123.1.2.el7.tar.xz  
+```
 или другой ресурс, но в решении используестся `vault.centos.org`  
 `wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.213.tar.xz`  
 `tar -xvf linux-4.4.213.tar.xz`  
