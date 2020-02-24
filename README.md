@@ -30,8 +30,11 @@ mkdir /opt/src/kernel -p && cd /opt/src/kernel
 
 Далее качиваем rpm пакет с наличием **__исходного кода ядра__** с одного из указанных ресурсов, и достаем исходники   
 ```
-wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.213.tar.xz  
-tar -xvf linux-4.4.213.tar.xz  
+#wget https://cdn.kernel.org/pub/linux/kernel/v4.x/linux-4.4.213.tar.xz  
+#tar -xvf linux-4.4.213.tar.xz  
+wget https://git.kernel.org/torvalds/t/linux-5.6-rc3.tar.gz
+tar -xvf linux-5.6-rc3.tar.gz
+
 ```
 В дирректории появится новый каталог с именем пакета, переходим в него и копируем действующий конфиг ядра  
 ```
