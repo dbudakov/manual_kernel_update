@@ -36,7 +36,7 @@ tar -xvf linux-4.4.213.tar.xz
 В дирректории появится новый каталог с именем пакета, переходим в него и копируем действующий конфиг ядра  
 ```
 cd linux-4.4.213  
-cp /boot/config`uname -r` ./.config  
+cp /boot/config-`uname -r` ./.config  
 ```
 альтернативный источник исходников [_vault.centos.org_](http://vault.centos.org/)  
 ```
