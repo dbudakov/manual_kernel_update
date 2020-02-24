@@ -79,6 +79,10 @@ sudo reboot
 ```
 uname -r  
 ```
-#### Настройка VirtualBox Shared Folders  
+#### Настройка VirtualBox Shared Folders
+для установки *guest с диска может быть использована 
+sh *guest.run --exec --base
+блягодаря чему рядом появится папки install идем в нее в каталог /src/vmbox/mbox-[version]/ и делаем make. make install
+
 На ВМ с собранным ядром из исходников добавляем Shared-Folders в _`Machine-Settings_Shared Folders`_ и _cd-rom_ через _`Machine-Settings_Storage`_, загружаем её, модуль отвечающий за cd-rom называется sr_mod, прожимаем в меню инструментов _`Devices-Insert Guest Additions...`_ монтируем _cd-rom_ запускаем _`/cdrom/VBoxLinuxAdditions.run`_ , в ходе установки могут понадобиться пакеты с drm, находим их через _`yum search drm`_ , ставим всё что нашли, в идеале после установки назначенные _`Shared Folders`_ автоматически подцепятся, если при создании назначено автоматичесткое монтирование.
 дополнительная информация по настройке на [странице](https://github.com/dbudakov/support/blob/master/virtualbox_shared_folder_centos.txt)
