@@ -50,9 +50,9 @@ tar -xvf linux-3.10.0-123.1.2.el7.tar.xz
 ```
 
 Для запуска **__make oldconfig__** потебуется _gcc_ , первая команда проверит возможна ли сборка, появиться настройка новых опций, можно передать параметр для ответа за паросы  
-```
+```shell
 yum install gcc flex bison -y 
-make oldconfig .config 
+make oldconfig .config #интерактивный режим выбора модулей
 или
 make olddefconfig .config
 или
