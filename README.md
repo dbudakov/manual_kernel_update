@@ -38,7 +38,7 @@ tar -xvf linux-5.6-rc3.tar.gz
 ```
 В дирректории появится новый каталог с именем пакета, переходим в него и копируем действующий конфиг ядра  
 ```
-cd linux-4.4.213  
+cd linux-5.6-rc3  
 cp /boot/config-`uname -r` ./.config  
 ```
 альтернативный источник исходников [_vault.centos.org_](http://vault.centos.org/)  
@@ -65,9 +65,7 @@ yum install elfutils-libelf-devel openssl-devel bc perl -y
 #yum install bc  
 #yum install perl  
 
-make -j[N] modules_install  
-
-make -j[N]  
+make -j[N]
 ```
 После успешной сборки запускаем `make -j[N] install`  , предварительно запустив `make -j[N] modules_install`
 ```
