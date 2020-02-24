@@ -23,7 +23,7 @@ yum install wget -y
 ```
 Создаем и переходим в каталог для сборки.  
 ``` 
-mkdir /opt/src/kernel && cd /opt/src/kernel
+mkdir /opt/src/kernel -p && cd /opt/src/kernel
 ```  
 
 
