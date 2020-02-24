@@ -48,24 +48,19 @@ tar -xvf linux-3.10.0-123.1.2.el7.tar.xz
 
 Для запуска **__make oldconfig__** потебуется _gcc_ , первая команда проверит возможна ли сборка, появиться настройка новых опций, можно передать параметр для ответа за паросы  
 ```
-yum install gcc -y
+yum install gcc flex bison -y 
 make oldconfig .config 
 или
-make olddefconfig
+make olddefconfig .config
 или
 yes "" | make oldconfig
 ```
-_Возможно возникнут ошибки при кофигурации, это не страшно смотрим и ставим необходимые пакеты в данной сборке это `flex` и `bison` и возвращаемся к конфигу:_  
-```
-yum install flex bison -y  
-make olddefconfig .config
-```
 Далее запуск **__make__** , в несколько потоков, _могут потребоваться следующие пакеты:_  
 ```  
-yum install elfutils-libelf-devel  
-yum install openssl-devel  
-yum install bc  
-yum install perl  
+yum install elfutils-libelf-devel openssl-devel bc perl -y
+#yum install openssl-devel  
+#yum install bc  
+#yum install perl  
 
 make -j[N] modules_install  
 
