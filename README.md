@@ -96,7 +96,7 @@ cd /mnt && ./VBoxLinuxAdditions.run
 ```
 дополнительно:  
 1. в ходе установки могут понадобиться пакеты с drm, ищем через `yum search drm`
+дополнительная информация по настройке на [странице](https://github.com/dbudakov/support/blob/master/virtualbox_shared_folder_centos.txt)  
 2. для установки *guest с диска может быть использована   
 sh *guest.run --exec --base  
 блягодаря чему рядом появится папки install идем в нее в каталог /src/vmbox/mbox-[version]/ и делаем make. make install
-дополнительная информация по настройке на [странице](https://github.com/dbudakov/support/blob/master/virtualbox_shared_folder_centos.txt)
