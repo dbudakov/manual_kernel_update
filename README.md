@@ -80,9 +80,23 @@ sudo reboot
 uname -r  
 ```
 #### Настройка VirtualBox Shared Folders
-для установки *guest с диска может быть использована 
-sh *guest.run --exec --base
+заносим в переменную UUID виртуальной машины, добавляем cd-rom, монтируем сопутствующий VBoxGuestAdditions.iso
+поднимаем VM монтируем cd-rom, запускаем установку, после установки, через консоль необходимо добавить локальной каталог для чтобы использовать на VM, при назначении использовать "Auto-mount"
+```
+clear && echo -n "write part name VM:" && read i;
+UUID=$(VBoxManage list vms|grep "$i"|awk '{print $2}')
+VBoxManage controlvm $UUID --poweroff
+VBoxManage storagectl $UUID --name SATA --add sata
+VBoxManage storageattach $UUID --storagectl SATA --port 1 --device 0 --type dvddrive --medium "/usr/share/virtualbox/VBoxGuestAdditions.iso"\
+VBoxManage startvm $UUID
+vagrant ssh
+sudo su -
+mount /dev/sr0 /mnt
+cd /mnt && ./VBoxLinuxAdditions.run
+```
+дополнительно:  
+1. в ходе установки могут понадобиться пакеты с drm, ищем через `yum search drm`
+2. для установки *guest с диска может быть использована   
+sh *guest.run --exec --base  
 блягодаря чему рядом появится папки install идем в нее в каталог /src/vmbox/mbox-[version]/ и делаем make. make install
-
-На ВМ с собранным ядром из исходников добавляем Shared-Folders в _`Machine-Settings_Shared Folders`_ и _cd-rom_ через _`Machine-Settings_Storage`_, загружаем её, модуль отвечающий за cd-rom называется sr_mod, прожимаем в меню инструментов _`Devices-Insert Guest Additions...`_ монтируем _cd-rom_ запускаем _`/cdrom/VBoxLinuxAdditions.run`_ , в ходе установки могут понадобиться пакеты с drm, находим их через _`yum search drm`_ , ставим всё что нашли, в идеале после установки назначенные _`Shared Folders`_ автоматически подцепятся, если при создании назначено автоматичесткое монтирование.
 дополнительная информация по настройке на [странице](https://github.com/dbudakov/support/blob/master/virtualbox_shared_folder_centos.txt)
