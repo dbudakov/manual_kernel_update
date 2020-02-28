@@ -88,11 +88,25 @@ VBoxManage controlvm $UUID --poweroff
 VBoxManage storagectl $UUID --name SATA --add sata
 VBoxManage storageattach $UUID --storagectl SATA --port 1 --device 0 --type dvddrive --medium "/usr/share/virtualbox/VBoxGuestAdditions.iso"
 VBoxManage startvm $UUID
+```
+теперь нужно доставить обновить и доставить нужные пакеты для установки доп.пакетов чтобы настроить shared folders, также после обновления ядро слетить на старое, нужно забиндить на новое:   
+```
+vagrant ssh
+sudo su -
+yum update
+yum install gcc kernel-devel-`uname -r` kernel-devel make
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg  
+sudo grub2-set-default 0  
+sudo reboot  
+```
+Далее установка, после которой, добавленные хостовые каталоги, с опцией автомонтирования, станут доступны: 
+```
 vagrant ssh
 sudo su -
 mount /dev/sr0 /mnt
 cd /mnt && ./VBoxLinuxAdditions.run
 ```
+
 дополнительно:  
 1. в ходе установки могут понадобиться пакеты с drm, ищем через `yum search drm`  
 дополнительная информация по настройке на [странице](https://github.com/dbudakov/support/blob/master/virtualbox_shared_folder_centos.txt)  
