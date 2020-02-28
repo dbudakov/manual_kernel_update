@@ -83,11 +83,10 @@ uname -r
 заносим в переменную UUID виртуальной машины, добавляем cd-rom, монтируем сопутствующий VBoxGuestAdditions.iso
 поднимаем VM монтируем cd-rom, запускаем установку, после установки, через консоль необходимо добавить локальной каталог для чтобы использовать на VM, при назначении использовать "Auto-mount"
 ```
-clear && echo -n "write part name VM:" && read i;
-UUID=$(VBoxManage list vms|grep "$i"|awk '{print $2}')
+UUID=$(VBoxManage list vms|awk '/kernel/{print $2}')
 VBoxManage controlvm $UUID --poweroff
 VBoxManage storagectl $UUID --name SATA --add sata
-VBoxManage storageattach $UUID --storagectl SATA --port 1 --device 0 --type dvddrive --medium "/usr/share/virtualbox/VBoxGuestAdditions.iso"\
+VBoxManage storageattach $UUID --storagectl SATA --port 1 --device 0 --type dvddrive --medium "/usr/share/virtualbox/VBoxGuestAdditions.iso"
 VBoxManage startvm $UUID
 vagrant ssh
 sudo su -
