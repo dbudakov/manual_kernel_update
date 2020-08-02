@@ -113,3 +113,5 @@ cd /mnt && ./VBoxLinuxAdditions.run
 2. для установки *guest с диска может быть использована   
 sh *guest.run --exec --base  
 блягодаря чему рядом появится папки install идем в нее в каталог /src/vmbox/mbox-[version]/ и делаем make. make install
+
+Возможно репозиторий с решением [здесь](https://github.com/boxcutter/centos/blob/master/script/cleanup.sh)  
