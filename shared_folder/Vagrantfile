@@ -35,13 +35,13 @@ Vagrant.configure("2") do |config|
           box.vm.provision "shell", inline: "mount /dev/sr0 /mnt &>/dev/null"
           box.vm.provision "shell", inline: "bash /mnt/VBoxLinuxAdditions.run &>/dev/null"
 
-          #check-list
+          # check-list
           box.vm.provision "shell", inline: "yum install -y git python3 &>/dev/null"
           box.vm.provision "shell", inline: "git clone https://github.com/cacharle/ft_printf_test /src/ft_printf_test"
           box.vm.provision "shell", inline: "sed -i \'s!../ft_printf!/dst/02.printf!\' /src/ft_printf_test/Makefile"
           box.vm.provision "shell", inline: "sed -i \"$(grep -n \'CCFLAGS =\' /src/ft_printf_test/Makefile|awk -F: \'{printf $1}\')a\\CCFLAGS =\" /src/ft_printf_test/Makefile"
 
-          #synchronize
+          #synchronize local path when root login
           box.vm.provision "shell", inline: "echo \'sync {default.rsyncssh, source=\"/mnt\",host=\"localhost\", targetdir=\"/src\"}\' >> /etc/lsyncd.conf"
           box.vm.provision "shell", inline: "echo \'for i in {0..172800}; do rsync -x --recursive --delete #{src_local} #{dst_local} &>/dev/null;sleep 0.5;done\' >/root/script.sh"
           box.vm.provision "shell", inline: "echo \'bash /root/script.sh & &>/dev/null\' >>/root/.bashrc"
