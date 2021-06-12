@@ -83,18 +83,20 @@ uname -r
 заносим в переменную UUID виртуальной машины, добавляем cd-rom, монтируем сопутствующий VBoxGuestAdditions.iso
 поднимаем VM монтируем cd-rom, запускаем установку, после установки, через консоль необходимо добавить локальной каталог для чтобы использовать на VM, при назначении использовать "Auto-mount"
 ```
-UUID=$(VBoxManage list vms|awk '/kernel/{print $2}')
-VBoxManage controlvm $UUID --poweroff
+vmname=$(awk -F\' '/^  :/ {print $2}' ./Vagrantfile)
+UUID=$(VBoxManage list vms|awk '/'$vmname'/{print $2}')
+VBoxManage controlvm $UUID poweroff
 VBoxManage storagectl $UUID --name SATA --add sata
-VBoxManage storageattach $UUID --storagectl SATA --port 1 --device 0 --type dvddrive --medium "/usr/share/virtualbox/VBoxGuestAdditions.iso"
-VBoxManage startvm $UUID
+VBoxManage storageattach $UUID --storagectl SATA --port 1 --device 0 --type dvddrive --medium \
+$(sudo find / -name *VBoxGuestAdditions* 2>/dev/null|grep VirtualBox|head -1)
+VBoxManage startvm $UUID --type headless
 ```
 теперь нужно доставить обновить и доставить нужные пакеты для установки доп.пакетов чтобы настроить shared folders, также после обновления ядро слетить на старое, нужно забиндить на новое:   
 ```
 vagrant ssh
 sudo su -
-yum update
-yum install gcc kernel-devel-`uname -r` kernel-devel make
+yum update -y
+yum install -y gcc kernel-devel-`uname -r` kernel-devel make
 sudo grub2-mkconfig -o /boot/grub2/grub.cfg  
 sudo grub2-set-default 0  
 sudo reboot  
@@ -104,7 +106,7 @@ sudo reboot
 vagrant ssh
 sudo su -
 mount /dev/sr0 /mnt
-cd /mnt && ./VBoxLinuxAdditions.run
+cd /mnt && ./VBoxLinuxAdditions.run 
 ```
 
 дополнительно:  
