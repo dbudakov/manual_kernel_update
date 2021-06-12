@@ -1,0 +1,39 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby:
+home = ENV['HOME']
+controller = 'SATA'
+disk = `find / -name *VBoxGuestAdditions* 2>/dev/null|head -1|tr -d '\n'`
+
+MACHINES = {
+  :'sandbox' => {
+      :box_name => "centos/7",
+      :ip_addr => '192.168.100.100',
+  }
+}
+
+Vagrant.configure("2") do |config|
+  MACHINES.each do |boxname, boxconfig|
+      config.vm.define boxname do |box|
+          box.vm.box = boxconfig[:box_name]
+          box.vm.host_name = boxname.to_s
+          box.vm.network "private_network", ip:boxconfig[:ip_addr]
+          box.vm.provider :virtualbox do |vb|
+            vb.customize ["modifyvm", :id, "--memory", "256"]
+            vb.customize ["modifyvm", :id, "--cpus", "1"]
+            vb.customize ["storagectl", :id, "--name", "SATA", "--add", "sata"]
+            vb.customize ['storageattach', :id,  '--storagectl', 'SATA', '--port', 1, '--device', 0, '--type', 'dvddrive', '--medium', disk]
+            vb.name = boxname.to_s
+          end
+
+          box.vm.provision "shell", inline: "echo step 1; yum update -y &>/dev/null"
+          box.vm.provision "shell", inline: "echo step 2; yum install -y gcc kernel-devel-`uname -r` kernel-devel make &>/dev/null"
+          box.vm.provision "shell", inline: "echo step 3.1; grub2-mkconfig -o /boot/grub2/grub.cfg &>/dev/null"
+          box.vm.provision "shell", inline: "echo step 3.2; grub2-set-default 0 &>/dev/null"
+          box.vm.provision 'shell', reboot:  true, inline: 'echo REBOOT'
+
+          box.vm.provision "shell", inline: "mount /dev/sr0 /mnt &>/dev/null"
+          box.vm.provision "shell", inline: "bash /mnt/VBoxLinuxAdditions.run &>/dev/null"
+          #
+      end
+    end
+end
